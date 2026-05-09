@@ -1,0 +1,28 @@
+body {
+    background: #f4f6f9;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#seccionRegistrarse {
+    display: none;
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+input:focus,
+select:focus {
+    box-shadow: none !important;
+    border: 1px solid #0d6efd !important;
+}

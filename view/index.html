@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestión de Nómina</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+    <div class="container py-4">
+
+        <!-- TITULO -->
+        <div class="text-center mb-4">
+            <h1 class="fw-bold">Sistema Gestión de Nómina</h1>
+            <p class="text-muted">
+                CRUD de empleados usando MVC y LocalStorage
+            </p>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="card shadow-sm p-4 mb-4">
+
+            <h3 class="mb-3">Inicio de Sesión</h3>
+
+            <form>
+
+                <div class="mb-3">
+                    <label>Email</label>
+
+                    <input type="email"
+                           class="form-control"
+                           placeholder="Ingrese su correo">
+                </div>
+
+                <div class="mb-3">
+                    <label>Contraseña</label>
+
+                    <input type="password"
+                           class="form-control"
+                           placeholder="Ingrese su contraseña">
+                </div>
+
+                <div class="d-flex justify-content-between">
+
+                    <button type="submit"
+                            class="btn btn-dark">
+
+                        Ingresar
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-primary"
+                            onclick="mostrarFormRegistro()">
+
+                        Registrar empleado
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- FORMULARIO -->
+        <section id="seccionRegistrarse">
+
+            <div class="card shadow p-4 mb-4">
+
+                <h3 class="mb-4">
+                    Registro de Empleados
+                </h3>
+
+                <form id="formEmpleado"
+                      action="javascript:crearEmpleado();">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label>Tipo Documento</label>
+
+                            <select class="form-select"
+                                    id="tipoDocumentoId">
+
+                                <option>CC</option>
+                                <option>TI</option>
+                                <option>CE</option>
+                                <option>PP</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Documento</label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="documentoId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Nombres</label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="nombreId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Apellidos</label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="apellidosId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Email</label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   id="emailId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Usuario</label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="usuarioId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Password</label>
+
+                            <input type="password"
+                                   class="form-control"
+                                   id="pwdId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Sueldo Base</label>
+
+                            <input type="number"
+                                   class="form-control"
+                                   id="sueldoBaseId"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Tipo Bonificación</label>
+
+                            <select class="form-select"
+                                    id="tipoBonificacionId">
+
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <button type="submit"
+                                class="btn btn-success">
+
+                            Guardar
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                onclick="ocultarFormulario()">
+
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+
+        <!-- TABLA -->
+        <div class="card shadow-sm p-4">
+
+            <h3 class="mb-3">
+                Lista de Empleados
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover align-middle">
+
+                    <thead class="table-dark text-center">
+
+                        <tr>
+                            <th>#</th>
+                            <th>Tipo</th>
+                            <th>Documento</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Usuario</th>
+                            <th>Sueldo Base</th>
+                            <th>Bonificación</th>
+                            <th>Adición</th>
+                            <th>Sueldo Total</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="listadoEmpleados"></tbody>
+
+                </table>
+
+            </div>
+
+            <!-- TOTAL NOMINA -->
+            <div class="alert alert-success mt-3">
+
+                <h4 id="totalNomina">
+                    Total Nómina: $0
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../model/Empleado.js"></script>
+    <script src="../model/Contrato.js"></script>
+
+    <script src="../controller/main.js"></script>
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>
